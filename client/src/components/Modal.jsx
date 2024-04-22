@@ -52,7 +52,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     } catch (err) {
       console.log(err.message);
     }
-  }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,9 +69,9 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
           <h3>Let's {mode} your task</h3>
           <button onClick={() => setShowModal(false)}>X</button>
         </div>
-
         <form>
           <input
+            className="todo-input"
             required
             maxLength={30}
             placeholder="Your Task goes here"
@@ -85,6 +85,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
             required
             type="range"
             id="range"
+            className="styled-slider"
             min={0}
             max={100}
             name="progress"
