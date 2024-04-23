@@ -363,7 +363,7 @@ input[type="range"].styled-slider.slider-progress:active::-ms-fill-lower {
 .modal .form-title-container button:hover {
   color: rgb(255, 50, 50) !important;
 }
-.todo-input:focus {
+#todo-input:focus {
   /* outline: none !important; */
   outline-color: rgb(108, 115, 148) !important;
   height: 40px !important;

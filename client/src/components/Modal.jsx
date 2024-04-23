@@ -71,7 +71,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
         </div>
         <form>
           <input
-            className="todo-input"
+            id="todo-input"
             required
             maxLength={30}
             placeholder="Your Task goes here"
