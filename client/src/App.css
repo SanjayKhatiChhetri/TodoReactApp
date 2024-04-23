@@ -56,6 +56,7 @@
   border: 1.5px solid rgb(108, 115, 148);
   color: rgb(108, 115, 148);
   text-transform: uppercase;
+  background-color: transparent;
 }
 .create:hover {
   background-color: rgb(108, 115, 148);
@@ -342,7 +343,7 @@ input[type="range"].styled-slider.slider-progress:active::-ms-fill-lower {
   background-color: #fff !important;
   border-radius: 10px !important;
   padding: 40px !important;
-  box-shadow: rgba(0, 0, 0, 0.9) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px !important;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px !important;
 }
 .modal .form-title-container {
   display: flex !important;
@@ -363,11 +364,23 @@ input[type="range"].styled-slider.slider-progress:active::-ms-fill-lower {
 .modal .form-title-container button:hover {
   color: rgb(255, 50, 50) !important;
 }
+
+input {
+  color: rgb(76, 88, 151);
+  background-color: transparent;
+}
+
+input:focus {
+  outline: none !important;
+  outline-color: rgb(108, 115, 148);
+  color: rgb(76, 88, 151) !important;
+}
+
 #todo-input:focus {
-  /* outline: none !important; */
-  outline-color: rgb(108, 115, 148) !important;
-  height: 40px !important;
-  transform: scale(1.1) !important;
+  outline: none !important;
+  outline-color: rgb(108, 115, 148);
+  height: 40px ;
+  transform: scale(1.1) ;
 }
 
 .modal form {
@@ -389,20 +402,23 @@ input[type="range"].styled-slider.slider-progress:active::-ms-fill-lower {
   width: 500px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.05) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
 }
 
 .auth-container-box form {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: 300px;
+  height: 325px;
 }
 
-.auth-options{
+.auth-container-box form h2 {
+  color: rgb(76, 88, 151);
+  margin-bottom: 20px;
+}
+
+.auth-options {
   display: flex;
-  /* justify-content: space-between; */
-  margin: 10px;
 }
 
 .auth-options button {
@@ -410,4 +426,11 @@ input[type="range"].styled-slider.slider-progress:active::-ms-fill-lower {
   width: 50%;
   border: none;
   color: rgb(35, 38, 47);
+}
+
+.auth-options button:active {
+  padding: 10px;
+  width: 50%;
+  border: none;
+  color: rgb(255, 255, 255) !important;
 }

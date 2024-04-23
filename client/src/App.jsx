@@ -14,7 +14,7 @@ const App = () => {
   const getData = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/todos/${userEmail}`
+        `${import.meta.env.VITE_APP_SERVERURL}/todos/${userEmail}`
       );
       const json = await response.json();
       setTasks(json);

@@ -5,6 +5,8 @@ const cors = require("cors");
 const app = express();
 const pool = require("./db");
 const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 app.use(cors());
 app.use(express.json());
@@ -48,7 +50,7 @@ app.get("/todos/:userEmail", async (req, res) => {
 });
 
 //create a new todo
-app.post("/todos", async(req, res) => {
+app.post("/todos", async (req, res) => {
   const { user_email, title, progress, date } = req.body;
   console.log(user_email, title, progress, date);
   const id = uuidv4();
@@ -64,7 +66,7 @@ app.post("/todos", async(req, res) => {
 });
 
 //edit a todo
-app.put("/todos/:id", async(req, res) => {
+app.put("/todos/:id", async (req, res) => {
   const { id } = req.params;
   const { user_email, title, progress, date } = req.body;
   console.log(id, user_email, title, progress, date);
@@ -80,11 +82,45 @@ app.put("/todos/:id", async(req, res) => {
 });
 
 //delete a todo
-app.delete("/todos/:id", async(req, res) => {
+app.delete("/todos/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const deleteTodo = await pool.query("DELETE FROM todos WHERE id = $1;", [id]);
+    const deleteTodo = await pool.query("DELETE FROM todos WHERE id = $1;", [
+      id,
+    ]);
     res.json(deleteTodo);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+//endpoint for Sign up
+app.post("/signup", async (req, res) => {
+  const { email, password } = req.body;
+  const salt = bcrypt.genSaltSync(10);
+  const hasedPassword = bcrypt.hashSync(password, salt);
+  try {
+    const signUp = await pool.query(
+      `INSERT INTO users (email, password) VALUES($1, $2);`,
+      [email, hasedPassword]
+    );
+
+    const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+
+    res.json({ token });
+  } catch (err) {
+    console.error(err);
+    if (err) {
+      res.json({ detail: err.detail });
+    }
+  }
+});
+
+//endpoint for Login
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
   } catch (err) {
     console.error(err);
   }
