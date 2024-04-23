@@ -378,3 +378,36 @@ input[type="range"].styled-slider.slider-progress:active::-ms-fill-lower {
 .modal label {
   font-size: 13px !important;
 }
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
+
+.auth-container-box {
+  width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
+}
+
+.auth-container-box form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 300px;
+}
+
+.auth-options{
+  display: flex;
+  /* justify-content: space-between; */
+  margin: 10px;
+}
+
+.auth-options button {
+  padding: 10px;
+  width: 50%;
+  border: none;
+  color: rgb(35, 38, 47);
+}
