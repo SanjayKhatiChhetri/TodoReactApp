@@ -10,6 +10,14 @@
 .main-title {
   color: rgb(255, 255, 255);
 }
+
+.todo-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
 .button-container,
 .info-container {
   display: flex;
@@ -113,6 +121,228 @@
   height: 40px !important;
   color: rgb(158, 169, 220);
   font-weight: 500;
+}
+
+/* List Header */
+.list-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: rdba(0, 0, 0, 0.05) 1px solid;
+  color: rgb(76, 88, 151);
+}
+
+/* List Item */
+.list-item {
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0 0 0 1px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-title {
+  color: rgb(76, 88, 151);
+}
+
+/* Tick Checkmark Svg Style */
+.tick {
+  padding: 10px;
+}
+/* .tick path {
+  fill: none;
+  stroke: #000;
+  stroke-miterlimit: 10;
+  stroke-width: 32px;
+} */
+
+/* Modal */
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  width: 50vw !important;
+  background-color: #fff !important;
+  border-radius: 10px !important;
+  padding: 40px !important;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px !important;
+}
+.modal .form-title-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  /* color: rgb(108, 115, 148); */
+}
+.form-title-container > h3 {
+  color: rgb(76, 88, 151) !important;
+}
+
+.modal .form-title-container button {
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 16px !important;
+  color: rgb(76, 88, 151);
+  font-size: 30px;
+}
+
+.form-title-container button svg {
+  width: 40px;
+  height: 40px;
+  viewbox: 0 0 24 24;
+  fill: none;
+  stroke: #4c5897;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.form-title-container button svg:hover {
+  width: 40px;
+  height: 40px;
+  viewbox: 0 0 24 24;
+  fill: none;
+  stroke: rgb(255, 50, 50);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.form-title-container button svg:active {
+  width: 40px;
+  height: 40px;
+  viewbox: 0 0 24 24;
+  fill: none;
+  stroke: rgb(255, 50, 50);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+input {
+  margin: 11px 0px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: rgb(76, 88, 151);
+  background-color: transparent;
+  outline: none;
+  outline-color: rgb(108, 115, 148);
+  transition: outline-color 0.5s ease-out;
+  border: 1.5px solid rgb(108, 115, 148);
+}
+
+input:focus {
+  outline: solid;
+  outline-width: 1.5px;
+  outline-color: rgb(68, 82, 149);
+  color: rgb(76, 88, 151);
+  border: 1.5px solid rgb(68, 82, 149);
+}
+
+#todo-input:focus {
+  outline: none !important;
+  outline-color: rgb(108, 115, 148);
+  height: 40px;
+  transform: scale(1.1);
+}
+
+.modal form {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.modal label {
+  font-size: 13px !important;
+  color: rgb(76, 88, 151) !important;
+}
+
+@media screen and (max-width: 435px) {
+  .app {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(255, 255, 255) !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+    padding: 0px !important;
+    width: 100% !important;
+    margin-top: 50px !important;
+  }
+
+  .auth-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px !important;
+  }
+
+  .auth-container-box {
+    width: 100% !important;
+    border-radius: 10px;
+    padding: 0px !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+  }
+
+  .auth-container-box form {
+    height: 50vh !important;
+    padding: 20px !important;
+  }
+
+  .auth-options button {
+    padding: 15px !important;
+    width: 50%;
+  }
+
+  .create {
+    border-radius: 10dvi !important;
+  }
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
+
+.auth-container-box {
+  width: 40dvw;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
+}
+
+.auth-container-box form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 325px;
+}
+
+.auth-container-box form h2 {
+  color: rgb(76, 88, 151);
+  margin-bottom: 20px;
+}
+
+.auth-options {
+  display: flex;
+}
+
+.auth-options button {
+  padding: 10px;
+  width: 50%;
+  border: none;
+}
+
+.auth-options button:active {
+  padding: 10px;
+  width: 50%;
+  border: none;
+  color: rgb(255, 255, 255) !important;
 }
 
 /*generated with Input range slider CSS style generator (version 20211225)
@@ -305,180 +535,4 @@ input[type="range"].styled-slider.slider-progress:hover::-ms-fill-lower {
 input[type="range"].styled-slider.slider-progress:active::-ms-fill-lower {
   background: #b0a4e7;
   border-color: #aab3e2;
-}
-
-/* List Header */
-.list-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: rdba(0, 0, 0, 0.05) 1px solid;
-  color: rgb(76, 88, 151);
-}
-
-/* List Item */
-.list-item {
-  width: 100%;
-  margin: 10px 0;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.08) 0 0 0 1px;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Tick Checkmark Svg Style */
-.tick {
-  padding: 10px;
-}
-/* .tick path {
-  fill: none;
-  stroke: #000;
-  stroke-miterlimit: 10;
-  stroke-width: 32px;
-} */
-
-/* Modal */
-.overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.65);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modal {
-  width: 50vw !important;
-  background-color: #fff !important;
-  border-radius: 10px !important;
-  padding: 40px !important;
-  box-shadow: rgba(0, 0, 0, 0.4) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px !important;
-}
-.modal .form-title-container {
-  display: flex !important;
-  justify-content: space-between !important;
-  /* color: rgb(108, 115, 148); */
-}
-.form-title-container > h3 {
-  color: rgb(76, 88, 151) !important;
-}
-
-.modal .form-title-container button {
-  background-color: transparent !important;
-  border: none !important;
-  font-size: 16px !important;
-  color: rgb(76, 88, 151);
-  font-size: 30px;
-}
-
-.form-title-container button svg {
-  width: 40px;
-  height: 40px;
-  viewbox: 0 0 24 24;
-  fill: none;
-  stroke: #4c5897;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.form-title-container button svg:hover {
-  width: 40px;
-  height: 40px;
-  viewbox: 0 0 24 24;
-  fill: none;
-  stroke: rgb(255, 50, 50);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.form-title-container button svg:active {
-  width: 40px;
-  height: 40px;
-  viewbox: 0 0 24 24;
-  fill: none;
-  stroke: rgb(255, 50, 50);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-input {
-  margin: 11px 0px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  color: rgb(76, 88, 151);
-  background-color: transparent;
-  outline: none;
-  outline-color: rgb(108, 115, 148);
-  transition: outline-color 0.5s ease-out;
-  border: 1.5px solid rgb(108, 115, 148);
-}
-
-input:focus {
-  outline: solid;
-  outline-width: 1.5px;
-  outline-color: rgb(68, 82, 149);
-  color: rgb(76, 88, 151);
-  border: 1.5px solid rgb(68, 82, 149);
-}
-
-#todo-input:focus {
-  outline: none !important;
-  outline-color: rgb(108, 115, 148);
-  height: 40px;
-  transform: scale(1.1);
-}
-
-.modal form {
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.modal label {
-  font-size: 13px !important;
-}
-
-.auth-container {
-  display: flex;
-  justify-content: center;
-  margin: 50px;
-}
-
-.auth-container-box {
-  width: 500px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.4) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
-}
-
-.auth-container-box form {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  height: 325px;
-}
-
-.auth-container-box form h2 {
-  color: rgb(76, 88, 151);
-  margin-bottom: 20px;
-}
-
-.auth-options {
-  display: flex;
-}
-
-.auth-options button {
-  padding: 10px;
-  width: 50%;
-  border: none;
-}
-
-.auth-options button:active {
-  padding: 10px;
-  width: 50%;
-  border: none;
-  color: rgb(255, 255, 255) !important;
 }

@@ -1,39 +1,41 @@
 import "./App.css";
-import ListHeader from "./components/ListHeader";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
 import Auth from "./components/Auth";
 
 
 const App = () => {
+  const [tasks, setTasks] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(null);
+
   const authToken = cookies.AuthToken;
   const userEmail = cookies.Email;
-  const [tasks, setTasks] = useState(null);
 
   const getData = async () => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_APP_SERVERURL}/todos/${userEmail}`
       );
-      const json = await response.json();
-      setTasks(json);
-      //console.log(json);
+
+      if (response.status === 200) {
+        const json = await response.json();
+        setTasks(json);
+      }
+      console.log(json);
     } catch (err) {
       console.error(err.message);
     }
   };
 
+  useEffect(() => {
+      getData();
+  }, []);
+  
   const sortedTasks = tasks?.sort(
     (a, b) => new Date(a.date) - new Date(b.date)
   );
-
-  useEffect(() => {
-    if (authToken) {
-      getData();
-    }
-  }, []);
 
   return (
     <div>
@@ -41,6 +43,7 @@ const App = () => {
         <h1 className="main-title">React Todo App</h1>
       </div>
       <div className="app">
+        <div className="todo-main-container">
         {!authToken && <Auth />}
         {authToken && (
           <>
@@ -50,6 +53,7 @@ const App = () => {
             ))}
           </>
         )}
+        </div>
       </div>
     </div>
   );

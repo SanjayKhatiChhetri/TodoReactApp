@@ -3,14 +3,21 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 
 const Modal = ({ mode, setShowModal, getData, task }) => {
-  const [cookies, setCookies, removeCookies] = useCookies(null);
+  const [cookies, setCookies, removeCookies] = useCookies(["user"]);
   const editMode = mode === "edit" ? true : false;
+
+  const signOut = () => {
+    console.log("signing out");
+    removeCookies("Email");
+    removeCookies("AuthToken");
+    window.location.reload();
+  };
 
   const [data, setData] = useState({
     user_email: editMode ? task.user_email : cookies.Email,
-    title: editMode ? task.title : "",
+    title: editMode ? task.title : null,
     progress: editMode ? task.progress : 50,
-    date: editMode ? task.date : new Date(),
+    date: editMode ? task.date : null,
   });
 
   const postData = async (e) => {
@@ -51,8 +58,8 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
       );
       if (response.status === 200) {
         console.log("I can now edit todos from UI");
-        setShowModal(false);
-        getData();
+        setShowModal(null);
+        setTimeout(() => getData(), 1000);
       }
     } catch (err) {
       console.log(err.message);
@@ -64,6 +71,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     setData((data) => ({
       ...data,
       [name]: value,
+      date: new Date(),
     }));
   };
 
@@ -72,16 +80,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
       <div className="modal">
         <div className="form-title-container">
           <h3>Let's {mode} your task</h3>
-          <button onClick={() => setShowModal(false)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="feather feather-x-circle"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="15" y1="9" x2="9" y2="15"></line>
-              <line x1="9" y1="9" x2="15" y2="15"></line>
-            </svg>
-          </button>
+          <button onClick={() => setShowModal(false)}>x</button>
         </div>
         <form>
           <input
@@ -100,8 +99,8 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
             type="range"
             id="range"
             className="styled-slider"
-            min={0}
-            max={100}
+            min="0"
+            max="100"
             name="progress"
             value={data.progress}
             onChange={handleChange}

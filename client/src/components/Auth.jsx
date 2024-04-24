@@ -8,14 +8,9 @@ const Auth = () => {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(false);
 
   // console.log(cookies);
-
-  const viewLogin = (status) => {
-    setError(null);
-    setIsLogin(status);
-  };
 
   const handleSubmit = async (e, endpoint) => {
     e.preventDefault();
@@ -40,20 +35,27 @@ const Auth = () => {
 
     const data = await response.json();
 
+    console.log(data);
+
     if (data.detail) {
       setError(data.detail);
     } else {
-      setCookie("Emai", data.email);
+      setCookie("Email", data.email);
       setCookie("AuthToken", data.token);
 
       window.location.reload();
     }
   };
 
+  const viewLogin = (status) => {
+    setError(null);
+    setIsLogin(status);
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-container-box">
-        <form>
+        <form className="aut-conatiner-form">
           <h2>{isLogIn ? "Please log in" : "Please sign up!"}</h2>
           <input
             type="email"
@@ -72,12 +74,12 @@ const Auth = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           )}
+          {error && <p>{error}</p>}
           <input
             type="submit"
             className="create"
             onClick={(e) => handleSubmit(e, isLogIn ? "login" : "signup")}
           />
-          {error && <p>{error}</p>}
         </form>
         <div className="auth-options">
           <button

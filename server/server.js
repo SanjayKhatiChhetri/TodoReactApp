@@ -51,12 +51,12 @@ app.get("/todos/:userEmail", async (req, res) => {
 
 //create a new todo
 app.post("/todos", async (req, res) => {
-  const { user_email, title, progress, date } = req.body;
-  console.log(user_email, title, progress, date);
   const id = uuidv4();
   try {
+    const { user_email, title, progress, date } = req.body;
+    console.log(req.body);
     const newTodo = await pool.query(
-      "INSERT INTO todos (id, user_email, title, progress, date) VALUES($1, $2, $3, $4, $5);",
+      `INSERT INTO todos (id, user_email, title, progress, date) VALUES($1, $2, $3, $4, $5);`,
       [id, user_email, title, progress, date]
     );
     res.json(newTodo);
@@ -72,12 +72,12 @@ app.put("/todos/:id", async (req, res) => {
   console.log(id, user_email, title, progress, date);
   try {
     const updateTodo = await pool.query(
-      "UPDATE todos SET user_email = $1, title = $2, progress = $3, date = $4 WHERE id = $5;",
+      `UPDATE todos SET user_email = $1, title = $2, progress = $3, date = $4 WHERE id = $5;`,
       [user_email, title, progress, date, id]
     );
     res.json(updateTodo);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
   }
 });
 
@@ -85,43 +85,72 @@ app.put("/todos/:id", async (req, res) => {
 app.delete("/todos/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const deleteTodo = await pool.query("DELETE FROM todos WHERE id = $1;", [
+    const deleteTodo = await pool.query(`DELETE FROM todos WHERE id = $1;`, [
       id,
     ]);
     res.json(deleteTodo);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
   }
 });
 
 //endpoint for Sign up
 app.post("/signup", async (req, res) => {
-  const { email, password } = req.body;
-  const salt = bcrypt.genSaltSync(10);
-  const hasedPassword = bcrypt.hashSync(password, salt);
   try {
+    const { user_email, password } = req.body;
+    console.log("Password", password)
+
+    const salt = bcrypt.genSaltSync(10);
+    const hasedPassword = bcrypt.hashSync(password, salt);
+
     const signUp = await pool.query(
-      `INSERT INTO users (email, password) VALUES($1, $2);`,
-      [email, hasedPassword]
+      `INSERT INTO users (user_email, password) VALUES($1, $2);`,
+      [user_email, hasedPassword]
     );
 
     const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
 
-    res.json({ token });
-  } catch (err) {
-    console.error(err);
-    if (err) {
-      res.json({ detail: err.detail });
+    res.json({ email, token });
+    const error = signUp.name === "error" 
+
+    if(!error) {
+      res.json({ email, token });
+    } else {
+      res.json({ detail: signUp.detail });
     }
+
+  } catch (err) {
+    res.json(error);
+    console.error(err);
   }
 });
 
 //endpoint for Login
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
+  
   try {
+    const { user_email, password } = req.body;
+
+    const users = await pool.query(
+      `SELECT * FROM users WHERE user_email = $1;`,
+      [user_email]
+    );
+
+    console.log(users)
+
+    if (!users.rows.length) return res.json({ detail: "User does not exist" });
+
+    const success = await bcrypt.compare(password, users.rows[0].password);
+    const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+
+    if (success) {
+      res.json({ user_email: users.rows[0].user_email, token });
+    } else {
+      res.json({ detail: "Invalid credentials" });
+    }
+
+
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 });
