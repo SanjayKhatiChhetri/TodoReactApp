@@ -1,15 +1,16 @@
 import "./App.css";
 import ListHeader from "./components/ListHeader";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import ListItem from "./components/ListItem";
 import Auth from "./components/Auth";
 
+
 const App = () => {
-  const userEmail = "sanjay@todo.com";
-
+  const [cookies, setCookie, removeCookie] = useCookies(null);
+  const authToken = cookies.AuthToken;
+  const userEmail = cookies.Email;
   const [tasks, setTasks] = useState(null);
-
-  const authToken = false;
 
   const getData = async () => {
     try {
@@ -37,7 +38,7 @@ const App = () => {
   return (
     <div>
       <div>
-        <h1>React Todo App</h1>
+        <h1 className="main-title">React Todo App</h1>
       </div>
       <div className="app">
         {!authToken && <Auth />}

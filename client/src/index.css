@@ -1,12 +1,32 @@
 :root {
   margin: 0;
   padding: 0;
-  font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", sans-serif;
   display: flex;
   justify-content: center;
   color-scheme: light dark;
-  background-color: rgb(233, 241, 249);
+  /* background-color: rgb(233, 241, 249); */
+  background: rgb(41, 47, 86);
+  background: linear-gradient(
+    90deg,
+    rgba(41, 47, 86, 1) 0%,
+    rgba(48, 51, 90, 1) 11%,
+    rgba(55, 55, 93, 1) 18%,
+    rgba(61, 59, 97, 1) 24%,
+    rgba(68, 64, 100, 1) 31%,
+    rgba(74, 68, 104, 1) 35%,
+    rgba(86, 77, 111, 1) 41%,
+    rgba(86, 77, 111, 1) 45%,
+    rgba(91, 91, 141, 1) 77%,
+    rgba(89, 91, 143, 1) 82%,
+    rgba(87, 90, 144, 1) 87%,
+    rgba(85, 90, 145, 1) 91%,
+    rgba(84, 90, 146, 1) 94%,
+    rgba(82, 89, 148, 1) 97%,
+    rgba(76, 88, 151, 1) 99%,
+    rgba(108, 115, 148, 1) 100%
+  );
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

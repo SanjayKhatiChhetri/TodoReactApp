@@ -1,16 +1,20 @@
 import React from "react";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 const Auth = () => {
+  const [cookies, setCookie, removeCookie] = useCookies([null]);
   const [isLogIn, setIsLogin] = useState(true);
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+
+  // console.log(cookies);
 
   const viewLogin = (status) => {
-    setIsLogin(status);
     setError(null);
+    setIsLogin(status);
   };
 
   const handleSubmit = async (e, endpoint) => {
@@ -19,6 +23,7 @@ const Auth = () => {
       setError("Passwords do not match");
       return;
     }
+
     const response = await fetch(
       `${import.meta.env.VITE_APP_SERVERURL}/${endpoint}`,
       {
@@ -34,7 +39,15 @@ const Auth = () => {
     );
 
     const data = await response.json();
-    console.log(data);
+
+    if (data.detail) {
+      setError(data.detail);
+    } else {
+      setCookie("Emai", data.email);
+      setCookie("AuthToken", data.token);
+
+      window.location.reload();
+    }
   };
 
   return (
@@ -70,7 +83,7 @@ const Auth = () => {
           <button
             onClick={() => viewLogin(false)}
             style={{
-              color: isLogIn ? "rgb(108, 115, 148)" : "rgb(255, 255, 255)",
+              color: isLogIn ? "rgb(76, 88, 151)" : "rgb(255, 255, 255)",
               backgroundColor: !isLogIn
                 ? "rgb(108, 115, 148)"
                 : "rgb(255, 255, 255)",
@@ -81,7 +94,7 @@ const Auth = () => {
           <button
             onClick={() => viewLogin(true)}
             style={{
-              color: !isLogIn ? "rgb(108, 115, 148)" : "rgb(255, 255, 255)",
+              color: !isLogIn ? "rgb(76, 88, 151)" : "rgb(255, 255, 255)",
               backgroundColor: isLogIn
                 ? "rgb(108, 115, 148) "
                 : "rgb(255, 255, 255)  ",
