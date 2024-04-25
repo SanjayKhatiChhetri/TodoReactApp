@@ -3,7 +3,7 @@
   box-shadow: rgba(0, 0, 0, 0.05) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
   border-radius: 5px;
   padding: 10px;
-  width: 80vw;
+  width: 600px;
   margin-top: 50px;
 }
 
@@ -12,6 +12,7 @@
 }
 
 .todo-main-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -144,6 +145,7 @@
 
 .task-title {
   color: rgb(76, 88, 151);
+  width: 190px;
 }
 
 /* Tick Checkmark Svg Style */
@@ -170,7 +172,7 @@
   align-items: center;
 }
 .modal {
-  width: 50vw !important;
+  width: 600px !important;
   background-color: #fff !important;
   border-radius: 10px !important;
   padding: 40px !important;
@@ -194,35 +196,14 @@
 }
 
 .form-title-container button svg {
-  width: 40px;
-  height: 40px;
-  viewbox: 0 0 24 24;
-  fill: none;
   stroke: #4c5897;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 .form-title-container button svg:hover {
-  width: 40px;
-  height: 40px;
-  viewbox: 0 0 24 24;
-  fill: none;
   stroke: rgb(255, 50, 50);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .form-title-container button svg:active {
-  width: 40px;
-  height: 40px;
-  viewbox: 0 0 24 24;
-  fill: none;
   stroke: rgb(255, 50, 50);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 input {
@@ -246,23 +227,23 @@ input:focus {
 }
 
 #todo-input:focus {
-  outline: none !important;
+  outline: none;
   outline-color: rgb(108, 115, 148);
   height: 40px;
   transform: scale(1.1);
 }
 
 .modal form {
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal label {
-  font-size: 13px !important;
-  color: rgb(76, 88, 151) !important;
+  font-size: 13px;
+  color: rgb(76, 88, 151);
 }
 
-@media screen and (max-width: 435px) {
+@media screen and (max-width: 630px) {
   .app {
     display: flex;
     justify-content: center;
@@ -300,6 +281,10 @@ input:focus {
 
   .create {
     border-radius: 10dvi !important;
+  }
+
+  .modal {
+    width: 65vw !important;
   }
 }
 
@@ -343,6 +328,39 @@ input:focus {
   width: 50%;
   border: none;
   color: rgb(255, 255, 255) !important;
+}
+.user-email {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  margin: 10px;
+  font-size: 13px;
+  color: rgb(76, 88, 151);
+}
+
+.copyright {
+  width: 100%;
+  color: rgb(114, 114, 114);
+  font-size: 11px;
+  margin: 10px;
+}
+
+.outer-bar {
+  width: 200px;
+  height: 14px;
+  background-color: rgb(216, 216, 216);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.inner-bar {
+  height: 14px;
+  /* colors:
+     rgb(255, 214, 161)
+     rgb(255, 175, 163)
+     rgb(108, 115, 148)
+     rgb(141, 181, 145)
+     rgb(114, 114, 114) */
 }
 
 /*generated with Input range slider CSS style generator (version 20211225)

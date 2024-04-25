@@ -1,23 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import CheckmarkIcon from "./CheckmarkIcon";
 
 const Modal = ({ mode, setShowModal, getData, task }) => {
   const [cookies, setCookies, removeCookies] = useCookies(["user"]);
-  const editMode = mode === "edit" ? true : false;
-
-  const signOut = () => {
-    console.log("signing out");
-    removeCookies("Email");
-    removeCookies("AuthToken");
-    window.location.reload();
-  };
+  const editMode = mode === "edit";
 
   const [data, setData] = useState({
-    user_email: editMode ? task.user_email : cookies.Email,
-    title: editMode ? task.title : null,
+    user_email: cookies.Email,
+    title: editMode ? task.title : "",
     progress: editMode ? task.progress : 50,
-    date: editMode ? task.date : null,
+    date: editMode ? task.date : "",
   });
 
   const postData = async (e) => {
@@ -34,12 +28,11 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
         }
       );
       if (response.status === 200) {
-        console.log("I can now add todos from UI");
-        setShowModal(false);
+        setShowModal(null);
         getData();
       }
-    } catch (err) {
-      console.log(err.message);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -62,7 +55,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
         setTimeout(() => getData(), 1000);
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err);
     }
   };
 
@@ -80,7 +73,9 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
       <div className="modal">
         <div className="form-title-container">
           <h3>Let's {mode} your task</h3>
-          <button onClick={() => setShowModal(false)}>x</button>
+          <button onClick={() => setShowModal(null)}>
+            <CheckmarkIcon />
+          </button>
         </div>
         <form>
           <input
