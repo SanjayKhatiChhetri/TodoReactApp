@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "deploy": "node server.js",
-    "build": "npm install && npm run build"
+    "build": "npm install && npm run node server.js"
   },
   "author": "Sanjay Khati Chhetri",
   "license": "ISC",
