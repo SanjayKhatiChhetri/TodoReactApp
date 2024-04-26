@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 
 const ListHeader = ({ listName, getData }) => {
-  const [showModal, setShowModal] = useState(null);
-  const [cookies, setCookie, removeCookies] = useCookies(["user"]);
+  const [showModal, setShowModal] = useState(false);
+  const [cookies, setCookie, removeCookies] = useCookies(null);
 
     const signOut = () => {
       removeCookies("Email");

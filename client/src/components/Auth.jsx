@@ -11,6 +11,10 @@ const Auth = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // console.log(cookies);
+  const viewLogin = (status) => {
+    setError(null);
+    setIsLogin(status);
+  };
 
   const handleSubmit = async (e, endpoint) => {
     e.preventDefault();
@@ -18,7 +22,7 @@ const Auth = () => {
       setError("Passwords do not match");
       return;
     }
-
+    
     const response = await fetch(
       `${import.meta.env.VITE_APP_SERVERURL}/${endpoint}`,
       {
@@ -45,12 +49,9 @@ const Auth = () => {
 
       window.location.reload();
     }
+    
   };
 
-  const viewLogin = (status) => {
-    setError(null);
-    setIsLogin(status);
-  };
 
   return (
     <div className="auth-container">
@@ -59,33 +60,27 @@ const Auth = () => {
           <h2>{isLogin ? "Please log in" : "Please sign up!"}</h2>
           <input
             type="email"
-            id="email"
             placeholder="email"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="PASSWORD"
-            id="password"
-            name="password"
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
           />
           {!isLogin && (
             <input
               type="password"
-              id="password-check"
-              name="password-check"
               placeholder="confirm password"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           )}
-          {error && <p>*{error}</p>}
           <input
             type="submit"
-            text="GO!"
             className="create"
             onClick={(e) => handleSubmit(e, isLogin ? "login" : "signup")}
-          />
+            />
+            {error && <p>*{error}</p>}
         </form>
         <div className="auth-options">
           <button

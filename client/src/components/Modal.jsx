@@ -5,13 +5,13 @@ import CheckmarkIcon from "./CheckmarkIcon";
 
 const Modal = ({ mode, setShowModal, getData, task }) => {
   const [cookies, setCookies, removeCookies] = useCookies(["user"]);
-  const editMode = mode === "edit";
+  const editMode = mode === "edit" ? true : false;
 
   const [data, setData] = useState({
-    user_email: cookies.Email,
+    user_email: editMode ? task.user_email : cookies.Email,
     title: editMode ? task.title : "",
     progress: editMode ? task.progress : 50,
-    date: editMode ? task.date : "",
+    date: editMode ? task.date : new Date(),
   });
 
   const postData = async (e) => {
@@ -28,6 +28,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
         }
       );
       if (response.status === 200) {
+        console.log("I can now post todos from UI");
         setShowModal(null);
         getData();
       }
@@ -51,8 +52,8 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
       );
       if (response.status === 200) {
         console.log("I can now edit todos from UI");
-        setShowModal(null);
-        setTimeout(() => getData(), 1000);
+        setShowModal(false);
+        getData();
       }
     } catch (err) {
       console.error(err);
@@ -64,8 +65,10 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     setData((data) => ({
       ...data,
       [name]: value,
-      date: new Date(),
     }));
+
+    console.log(data);
+    
   };
 
   return (

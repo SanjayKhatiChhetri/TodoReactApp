@@ -6,7 +6,7 @@ import Modal from "./Modal";
 
 
 const ListItem = ({ task, getData }) => {
-  const [showModal, setShowModal] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const deleteItem = async () => {
     try {
@@ -21,7 +21,7 @@ const ListItem = ({ task, getData }) => {
         getData();
       }
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
     }
   };
 

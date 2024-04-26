@@ -17,18 +17,17 @@ const App = () => {
       const response = await fetch(
         `${import.meta.env.VITE_APP_SERVERURL}/todos/${userEmail}`
       );
-
-      if (response.status === 200) {
-        const json = await response.json();
-        setTasks(json);
-      }
+      const json = await response.json();
+      setTasks(json);
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    getData();
+    if (authToken) {
+      getData();
+    }
   }, []);
 
   console.log(tasks);
@@ -48,9 +47,7 @@ const App = () => {
           {authToken && (
             <>
               <ListHeader listName={`My Todo Tasks`} getData={getData} />
-              <p className="user-email">
-                Welcome back {userEmail}
-              </p>
+              <p className="user-email">Welcome back {userEmail}</p>
               {sortedTasks?.map((task) => (
                 <ListItem key={task.id} task={task} getData={getData} />
               ))}
