@@ -25,3 +25,11 @@ dist-ssr
 
 #ignore package-lock.json
 .package-lock.json/
+
+
+#env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
