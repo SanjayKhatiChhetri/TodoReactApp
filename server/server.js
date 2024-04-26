@@ -11,9 +11,10 @@ const jwt = require("jsonwebtoken");
 app.use(
   cors({
     corsOptions: {
-      origin: "*",
+      origin: "https://todo-react-app-client.vercel.app",
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization"],
       Credentials: true,
-      optionSuccessStatus: 200,
     },
   })
 );
@@ -58,7 +59,6 @@ app.post("/todos", async (req, res) => {
   const id = uuidv4();
   const { user_email, title, progress, date } = req.body;
   try {
-    
     const newTodo = await pool.query(
       `INSERT INTO todos (id, user_email, title, progress, date) VALUES($1, $2, $3, $4, $5 );`,
       [id, user_email, title, progress, date]
@@ -87,9 +87,8 @@ app.put("/todos/:id", async (req, res) => {
 
 //delete a todo
 app.delete("/todos/:id", async (req, res) => {
-  
   const { id } = req.params;
-  
+
   try {
     const deleteTodo = await pool.query(`DELETE FROM todos WHERE id = $1;`, [
       id,
@@ -100,7 +99,6 @@ app.delete("/todos/:id", async (req, res) => {
   }
 });
 
-
 //endpoint for Sign up
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
@@ -109,7 +107,6 @@ app.post("/signup", async (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   const hasedPassword = bcrypt.hashSync(password, salt);
   try {
-
     const signUp = await pool.query(
       `INSERT INTO users (email, password) VALUES($1, $2);`,
       [email, hasedPassword]
@@ -121,7 +118,7 @@ app.post("/signup", async (req, res) => {
   } catch (err) {
     console.error(err);
     if (err) {
-      res.json({detail: err.detail});
+      res.json({ detail: err.detail });
     }
   }
 });
@@ -130,7 +127,6 @@ app.post("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-
     const users = await pool.query(`SELECT * FROM users WHERE email = $1;`, [
       email,
     ]);
