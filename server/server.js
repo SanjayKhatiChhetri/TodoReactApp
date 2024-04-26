@@ -10,7 +10,11 @@ const jwt = require("jsonwebtoken");
 
 app.use(
   cors({
-    origin: "https://todo-react-app-client.vercel.app",
+    corsOptions: {
+      origin: "*",
+      Credentials: true,
+      optionSuccessStatus: 200,
+    },
   })
 );
 
