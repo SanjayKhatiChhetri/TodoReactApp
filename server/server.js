@@ -29,31 +29,15 @@ app.get("/", (req, res) => {
 });
 
 //get all todos
-app.get("/todos", async (req, res) => {
-  console.log(req);
-  try {
-    const todos = await pool.query("SELECT * FROM todos");
-    res.json(todos.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-//create a new todo
-app.post("/todos", async (req, res) => {
-  try {
-    const id = uuidv4();
-    const { user_email, title, progress, date } = req.body;
-    console.log(req.body);
-    const newTodo = await pool.query(
-      `INSERT INTO todos (id, user_email, title, progress, date) VALUES($1, $2, $3, $4, $5 );`,
-      [id, user_email, title, progress, date]
-    );
-    res.json(newTodo);
-  } catch (err) {
-    console.error(err);
-  }
-});
+// app.get("/todos", async (req, res) => {
+//   console.log(req);
+//   try {
+//     const todos = await pool.query("SELECT * FROM todos");
+//     res.json(todos.rows);
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+// });
 
 //get all todo for a user with email
 app.get("/todos/:userEmail", async (req, res) => {
@@ -65,20 +49,23 @@ app.get("/todos/:userEmail", async (req, res) => {
     );
     res.json(todos.rows);
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
   }
 });
 
-//delete a todo
-app.delete("/todos/:id", async (req, res) => {
-  const { id } = req.params;
+//create a new todo
+app.post("/todos", async (req, res) => {
+  const id = uuidv4();
+  const { user_email, title, progress, date } = req.body;
   try {
-    const deleteTodo = await pool.query(`DELETE FROM todos WHERE id = $1;`, [
-      id,
-    ]);
-    res.json(deleteTodo);
-  } catch (error) {
-    console.error(error);
+    
+    const newTodo = await pool.query(
+      `INSERT INTO todos (id, user_email, title, progress, date) VALUES($1, $2, $3, $4, $5 );`,
+      [id, user_email, title, progress, date]
+    );
+    res.json(newTodo);
+  } catch (err) {
+    console.error(err);
   }
 });
 
@@ -93,19 +80,35 @@ app.put("/todos/:id", async (req, res) => {
       [user_email, title, progress, date, id]
     );
     res.json(updateTodo);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
   }
 });
 
+//delete a todo
+app.delete("/todos/:id", async (req, res) => {
+  
+  const { id } = req.params;
+  
+  try {
+    const deleteTodo = await pool.query(`DELETE FROM todos WHERE id = $1;`, [
+      id,
+    ]);
+    res.json(deleteTodo);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+
 //endpoint for Sign up
 app.post("/signup", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log("PASSWORD", password);
+  const { email, password } = req.body;
+  console.log("PASSWORD", password);
 
-    const salt = bcrypt.genSaltSync(10);
-    const hasedPassword = bcrypt.hashSync(password, salt);
+  const salt = bcrypt.genSaltSync(10);
+  const hasedPassword = bcrypt.hashSync(password, salt);
+  try {
 
     const signUp = await pool.query(
       `INSERT INTO users (email, password) VALUES($1, $2);`,
@@ -115,29 +118,22 @@ app.post("/signup", async (req, res) => {
     const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
 
     res.json({ email, token });
-    const error = signUp.name === "error";
-
-    if (!error) {
-      res.json({ email, token });
-    } else {
-      res.json({ detail: signUp.detail });
-    }
   } catch (err) {
-    res.json(err);
     console.error(err);
+    if (err) {
+      res.json({detail: err.detail});
+    }
   }
 });
 
 //endpoint for Login
 app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
 
     const users = await pool.query(`SELECT * FROM users WHERE email = $1;`, [
       email,
     ]);
-
-    console.log(users);
 
     if (!users.rows.length) return res.json({ detail: "User does not exist" });
 
