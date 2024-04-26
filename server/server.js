@@ -8,7 +8,12 @@ const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://todo-react-app-client.vercel.app",
+  })
+);
+
 app.use(express.json());
 
 app.listen(PORT, () => {
