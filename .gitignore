@@ -32,3 +32,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# ignore browser.log
+**/browser.log
+
+# ignore md.md
+**/md.md
