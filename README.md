@@ -32,11 +32,12 @@ A full-stack todo application built with React, Node.js, and PostgreSQL.
 
 ## Project Structure
 
-todo-app/
-│
-├── client/ # React frontend
-├── server/ # Node.js backend
-└── README.md
+- `server/`: Contains the server-side code
+- `client/`: Contains the client-side code and assets
+  - `src/`: Source files
+    - `components/`: React components
+- `package.json`: Project dependencies and scripts
+- `README.md`: Project documentation
 
 ## Getting Started
 
@@ -67,7 +68,7 @@ cd react-todo-app`
 
 3. Set up environment variables
 
-   - Create a `.env` file in the server directory
+   - Create a `.env` file in the client directory
 
    ```.env
    VITE_APP_SERVERURL=http://localhost:8001
