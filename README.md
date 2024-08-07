@@ -30,6 +30,18 @@ A full-stack todo application built with React, Node.js, and PostgreSQL.
 - bcrypt for password hashing
 - jsonwebtoken for authentication
 
+### API Endpoints
+
+## API Endpoints
+
+- `GET /todos`: Fetch all todos
+- `GET /todos/:userEmail`: Fetch todos for a specific user
+- `POST /todos`: Create a new todo
+- `PUT /todos/:id`: Update an existing todo
+- `DELETE /todos/:id`: Delete a todo
+- `POST /signup`: Register a new user
+- `POST /login`: Authenticate a user
+
 ## Project Structure
 
 - `server/`: Contains the server-side code
