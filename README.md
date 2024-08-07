@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# React Todo App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack todo application built with React, Node.js, and PostgreSQL.
 
-## Available Scripts
+## Live Demo
 
-In the project directory, you can run:
+[View the live application](https://todo-react-app-client.vercel.app/)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- User authentication (signup/login)
+- Create, read, update, and delete todos
+- Progress tracking for each todo
+- Responsive design
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- Vite
+- React Cookie for state management
+- CSS for styling
 
-### `npm run build`
+### Backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js
+- Express.js
+- PostgreSQL
+- bcrypt for password hashing
+- jsonwebtoken for authentication
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+todo-app/
+│
+├── client/ # React frontend
+├── server/ # Node.js backend
+└── README.md
 
-### `npm run eject`
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Node.js
+- PostgreSQL
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Installation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Clone the repository
+   `git clone https://github.com/your-username/react-todo-app.git
+cd react-todo-app`
 
-## Learn More
+2. Install dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   Install server dependencies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ` cd server`
 
-### Code Splitting
+   ` npm install`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   Install client dependencies
 
-### Analyzing the Bundle Size
+   ` cd ../client`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   ` npm install`
 
-### Making a Progressive Web App
+3. Set up environment variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   - Create a `.env` file in the server directory
 
-### Advanced Configuration
+   ```.env
+   VITE_APP_SERVERURL=http://localhost:8001
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   - Create a `.env` file in the server directory
+   - Add the following variables:
 
-### Deployment
+   ```
+       DB_USERNAME=your_db_username
+       DB_PASSWORD=your_db_password
+       DB_HOST=localhost
+       DB_PORT=5432
+       DB_DATABASE=todoreactapp
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+4. Set up the database
 
-### `npm run build` fails to minify
+   - Create a PostgreSQL database named `todoreactapp`
+   - Run the SQL commands in `server/data.sql` to create the necessary tables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Running the Application
+
+1. Start the server
+
+   `cd server`
+
+   `npm run dev`
+
+2. Start the client
+
+   ` cd client`
+
+   ` npm start`
+
+3. Open your browser and navigate to `http://localhost:5173`
+
+## Contributing
+
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please [open a issue](https://github.com/SanjayKhatiChhetri/TodoReactApp/issues) or submit a [Pull Request](https://github.com/SanjayKhatiChhetri/TodoReactApp/pulls).
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more information. Contact If you have any questions or inquiries, please contact Sanjay Khati Chhetri, social can be found at [Github Profile](https://github.com/SanjayKhatiChhetri) under Where to find me section.
