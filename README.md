@@ -30,7 +30,6 @@ A full-stack todo application built with React, Node.js, and PostgreSQL.
 - bcrypt for password hashing
 - jsonwebtoken for authentication
 
-### API Endpoints
 
 ## API Endpoints
 
