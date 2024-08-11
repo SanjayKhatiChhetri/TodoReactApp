@@ -123,4 +123,4 @@ cd react-todo-app`
 Contributions are welcome! If you find any bugs or have suggestions for improvements, please [open a issue](https://github.com/SanjayKhatiChhetri/TodoReactApp/issues) or submit a [Pull Request](https://github.com/SanjayKhatiChhetri/TodoReactApp/pulls).
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md]([https://github.com/SanjayKhatiChhetri/angularTodoApp/blob/main/LICENSE](https://github.com/SanjayKhatiChhetri/TodoReactApp/blob/main/LICENSE) file for details. Contact If you have any questions or inquiries, please contact Sanjay Khati Chhetri, social can be found at [Github Profile](https://github.com/SanjayKhatiChhetri) under Where to find me section.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/SanjayKhatiChhetri/TodoReactApp/blob/main/LICENSE) file for details. Contact If you have any questions or inquiries, please contact Sanjay Khati Chhetri, social can be found at [Github Profile](https://github.com/SanjayKhatiChhetri) under Where to find me section.
